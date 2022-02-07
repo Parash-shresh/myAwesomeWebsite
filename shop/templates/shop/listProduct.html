@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+ <body>
+
+
+  <!-- code to list product from database. yo code views.py bata listProduct() function  le render garekoxa -->
+  <p>
+    {% for object in objects %}
+      <h1>{{object.product_name}}</h1>
+      <br>{{object.product_desc}} </br> 
+      <br>{{object.category}}
+      <br>{{object.price}}
+      <br>{{object.product_published}} 
+      <br>{{object.image}}
+      <br>
+    {% endfor %}
+  </p>
+  
+</body>
+</html>

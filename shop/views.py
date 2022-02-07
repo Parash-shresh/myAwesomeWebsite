@@ -1,3 +1,4 @@
+from math import ceil #product slides show garna lai logic 
 from django.http import HttpResponse
 from django.shortcuts import render
 
@@ -6,11 +7,22 @@ from shop.models import Product
 # Create your views here.
 def shopIndex(request):
     return HttpResponse("from ShopIndex")
-def index(request):
-    return render(request, 'shop/index.html')
 
-# def about(request):
-#     return render(request,'shop/about.html')
+def index(request):
+    #sabai product database bata line
+    products = Product.objects.all()
+
+    print(products) #this prints value from products
+    
+    #logic to display product slides
+    n = len(products)
+    nSlides = n//4 +ceil((n/4)-(n//4))
+
+    params = {'no_of_slides': nSlides,'range': range(1,nSlides), 'product': products} #dictionary declared for passing. product ma sabai products aauxa
+    return render(request, 'shop/index.html', params)
+
+def about(request):
+    return render(request,'shop/about.html')
 
 def search(request):
     return HttpResponse("we create serach")
@@ -22,7 +34,7 @@ def checkout(request):
     return HttpResponse("we create checkout")
 
 def contact(request):
-    return HttpResponse("we create contact")
+    return render(request,'shop/contact.html')
 
 def tracker(request):
     return HttpResponse("we create tracker")
@@ -40,9 +52,9 @@ def tracker(request):
 #       {{object.image}}<br>
 #     {% endfor %}
 #   </p>
-def about(request):
+def listProduct(request):
     objects = Product.objects.all()
     context = {
             'objects' : objects
             }
-    return render(request,'shop/about.html',context)
+    return render(request,'shop/listProduct.html',context)
